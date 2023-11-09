@@ -21,5 +21,21 @@ INSERT INTO komembertest values(mem_numb.nextval,
 	   to_date('2004-06-08','YYYY-MM-DD'),
 	   'Female','010-9876-5431','zxc456@abc.com');
 -- 3. 조회 sql 작성
+SELECT *
+FROM KOMEMBERTEST
+WHERE name LIKE '%홍%';
 -- 4. VO 객체 작성
+/*
+class KomemberTest{
+    private String name;
+    private String password;
+    private Date birthdate; 
+    private String gender;
+    private String phone;
+    private String emailReceiv;
+    private String email;
+    private String address;
+    private long membershipNumber;
+}
+ */
 -- 5. 기능메서드 선언

@@ -11,7 +11,7 @@
 </style>
 <body>
     <h2>회원가입</h2>
-    <form action="서버의 url" method="post">
+    <form action="z01_joinComplete.jsp" method="post">
         <table border>
             <tr>
                 <td class="tableHead"><label for="name">성명:</label></td>
@@ -32,7 +32,7 @@
                 <td>
                     <input type="radio" id="male" name="gender" value="male" required>
                     <label for="male">남성</label>
-                    <input type="radio" id="female" name="gender" value="male" required>
+                    <input type="radio" id="female" name="gender" value="female" required>
                     <label for="female">여성</label>
                 </td>
             </tr>
@@ -66,10 +66,11 @@
                 
                 <td class="tableHead" colspan="2">
                     <input type="submit" value="회원가입신청" style="float:right;" 
-                    onclick="goCompletePage(),submitForm()">
+                    onclick="submitForm()">
                 </td>
             </tr>
         </table>
+        <input type="hidden" id="membershipNumberInput" name="membershipNumber" value="">
     </form>
 </body>
 <script>
@@ -94,27 +95,37 @@
         }).open();
     } // 주소찾기 함수 끝
 
-    function goCompletePage(){
-        location.href ="joinComplete.html";
-    }
-
     function submitForm(){
         // 멤버십 번호 생성
         var membershipNumber = Math.floor(Math.random()*9999999999);
+        
+        // hidden input에 멤버십 번호 설정..
+        alert("membership Number:"+membershipNumber);
+        console.log("membership Number:",membershipNumber);
+        document.getElementById("membershipNumberInput").value=membershipNumber;
+        // 필수 체크박스 선택자
+        var gender = document.querySelector('input[name="gender"]:checked');
+        var emailReceiv = document.querySelector('input[name="emailReceiv"]:checked');
         // 데이터 객체  생성
         var data = {
             // getElementById("id값")이 가리키는 객체의 value값을 저장.
             name: document.getElementById("name").value, 
             password: document.getElementById("password").value,
             birthdate: document.getElementById("birthdate").value,
-            gender: document.getElementById("gender").value,
+            gender: gender ? gender.value : "",
             phone: document.getElementById("phone").value,
-            emailReceiv: document.getElementById("emailReceiv").value,
+            emailReceiv: emailReceiv ? emailReceiv.value : "",
             email: document.getElementById("email").value,
             address: document.getElementById("address").value,
             membershipNumber: membershipNumber
         };
-    }
+
+	    if (data.name === "" || data.password === "" || data.birthdate === "" || data.gender === "" || data.phone === "" || data.emailReceiv === "") {
+	        alert("필수 입력 항목을 모두 작성해주세요.");
+	        return false; // 제출을 막음
+	    } 
+
+    }// submitForm() 함수의 끝
 
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

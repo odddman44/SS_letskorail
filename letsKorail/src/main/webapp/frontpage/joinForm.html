@@ -11,11 +11,17 @@
 </style>
 <body>
     <h2>회원가입</h2>
-    <form action="registration" method="post">
+    <form action="서버의 url" method="post">
         <table border>
             <tr>
                 <td class="tableHead"><label for="name">성명:</label></td>
                 <td><input type="text" id="name" name="name" required></td>
+            </tr>
+            <tr>
+                <td class="tableHead"><label for="password">비밀번호:</label></td>
+                <td>
+                    <input type="password" id="password" name="password" placeholder="비밀번호입력" required>
+                </td>
             </tr>
             <tr>
                 <td class="tableHead"><label for="birthdate">생년월일:</label></td>
@@ -58,7 +64,10 @@
             </tr>
             <tr>
                 
-                <td class="tableHead" colspan="2"><input type="submit" value="회원가입신청" style="float:right;"></td>
+                <td class="tableHead" colspan="2">
+                    <input type="submit" value="회원가입신청" style="float:right;" 
+                    onclick="goCompletePage(),submitForm()">
+                </td>
             </tr>
         </table>
     </form>
@@ -83,7 +92,30 @@
                 }
             }
         }).open();
+    } // 주소찾기 함수 끝
+
+    function goCompletePage(){
+        location.href ="joinComplete.html";
     }
+
+    function submitForm(){
+        // 멤버십 번호 생성
+        var membershipNumber = Math.floor(Math.random()*9999999999);
+        // 데이터 객체  생성
+        var data = {
+            // getElementById("id값")이 가리키는 객체의 value값을 저장.
+            name: document.getElementById("name").value, 
+            password: document.getElementById("password").value,
+            birthdate: document.getElementById("birthdate").value,
+            gender: document.getElementById("gender").value,
+            phone: document.getElementById("phone").value,
+            emailReceiv: document.getElementById("emailReceiv").value,
+            email: document.getElementById("email").value,
+            address: document.getElementById("address").value,
+            membershipNumber: membershipNumber
+        };
+    }
+
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

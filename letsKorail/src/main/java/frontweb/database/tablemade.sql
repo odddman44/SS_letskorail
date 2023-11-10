@@ -1,29 +1,29 @@
 -- 1. 테이블 생성
-CREATE TABLE koMemberTest(
-	kmno NUMBER,
-	name varchar2(50),
-	mbsnumber NUMBER,
-	pwd varchar2(50),
-	birthdate DATE,
-	gender varchar2(10),
-	phone varchar(13),
-  	email VARCHAR2(50)
+CREATE TABLE koMember (
+    member_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50) NOT NULL,
+    password VARCHAR2(50) NOT NULL,
+    birthdate DATE NOT NULL,
+    gender VARCHAR2(10) NOT NULL,
+    phone VARCHAR2(15) NOT NULL,
+    emailReceiv VARCHAR2(20) NOT NULL,
+    email VARCHAR2(50),
+    address VARCHAR2(100),
+    membershipNumber NUMBER
 );
-SELECT * FROM koMemberTest;
 -- 2. 데이터 입력
-CREATE SEQUENCE mem_numb;
-INSERT INTO komembertest values(mem_numb.nextval,
-	   '오길동', 2123254998,7777,
-	   to_date('1996-03-01','YYYY-MM-DD'),
-	   'Male','010-1234-5678','abc123@abc.com');
-INSERT INTO komembertest values(mem_numb.nextval,
-	   '홍길순', 2177854623,1234,
-	   to_date('2004-06-08','YYYY-MM-DD'),
-	   'Female','010-9876-5431','zxc456@abc.com');
+CREATE SEQUENCE member_id_seq;
+INSERT INTO koMember 
+(member_id, name, password, birthdate, gender, phone, emailReceiv, email, address, membershipNumber)
+VALUES (member_id_sequence.NEXTVAL, '관리자', 'admin', TO_DATE('2023-01-01', 'YYYY-MM-DD'),
+'Male', '010-0000-0000', 'yes', 'admin@korail.com',
+'(34618)대전광역시 동구 중앙로 240', 1000000001);
+
+SELECT * FROM komember;
 -- 3. 조회 sql 작성
 SELECT *
-FROM KOMEMBERTEST
-WHERE name LIKE '%홍%';
+FROM KOMEMBER
+WHERE name LIKE '%관리자%';
 -- 4. VO 객체 작성
 /*
 class KomemberTest{

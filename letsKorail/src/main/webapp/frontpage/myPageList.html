@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    /*전체 영역에서 여백 없애기*/
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    /*ul li태그에 리스트 스타일을 없앰*/
+    ul li{
+        list-style:none;
+    }
+    /* a태그에 텍스트 밑줄을 없애고 색상변경*/
+    a{
+        text-decoration:none ;
+        color:#333;
+    }
+    #menu {
+        font:bold 16px "malgun gothic";
+        width:90%;
+        height:50px;
+        background : white;
+        color:black;
+        line-height:50px;
+        margin:0 auto;
+        text-align: center;
+    }
+    #menu > ul > li{
+        width:150px;
+        position:relative;
+    }
+    /* 메인 메뉴 항목에 마우스 오버 시 스타일 */
+    #menu > ul > li:hover {
+        background: #083B82; /* 배경색 변경 */
+        color: white; /* 글자색 변경 */
+    }
+    /* 메인 메뉴 링크에 대한 스타일*/
+    #menu > ul > li > a {
+        display: block; /* a태그를 블록요소로 만들어 전체영역 클릭 가능*/
+        color:black; /*글자색 초기 설정*/
+    }
+    /*메인 메뉴 링크에 마우스 오버 시 글자색 변경*/
+    #menu > ul > li:hover > a {
+        color:white; /*글자색 변경..*/
+    }
+    #menu > ul > li > ul {
+        width:150px;
+        visibility: hidden; /* 변경된 부분 */
+        opacity: 0; /* 추가된 부분 */
+        position:relative;
+        font-size:14px;
+        background:#F6F6F6;
+        overflow: hidden; /* 내용이 넘칠 때 숨기기 */
+        max-height: 0; /*  최대 높이 설정 */
+        transition: visibility 0s, opacity 1s ease, max-height 1s ease;
+    }
+    #menu > ul> li:hover > ul {
+        visibility: visible; /* 변경된 부분 */
+        opacity: 1; /* 추가된 부분 */
+        max-height: 500px; /* 변경된 부분 */
+        transition-delay: 0s; /* 추가된 부분 */
+    }
+    #menu > ul > li > ul >li:hover {
+        background : white;
+        transition: ease 0.5s;
+    }
+    #menu > ul > li > ul >li:hover > a{
+        color:#083B82;
+    }
+</style>
+<body>
+    <div id="menu">
+        <ul>
+            <li><a href="#">승차권 이용내역</a>
+                <ul>
+                    <li><a href="#">발권/취소(반환)</a></li>
+                    <li><a href="#">이용실적조회</a></li>
+                </ul>
+            </li>
+            <li><a href="#">여행상품 이용내역</a></li>
+            <li><a href="#">멤버십 실적조회</a></li>
+            <li><a href="#">회원정보관리</a>
+                <ul>
+                    <li><a href="#">나의정보수정</a></li>
+                    <li><a href="#">비밀번호변경</a></li>
+                    <li><a href="#">이메일/휴대폰인증</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

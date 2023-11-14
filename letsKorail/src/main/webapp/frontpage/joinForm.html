@@ -6,7 +6,11 @@
 </head>
 <style>
     .tableHead{
-        background-color: mediumaquamarine;
+        background-color: #083B82;
+        color : white;
+        font-size: 15px;
+        text-align: center;
+
     }
 </style>
 <body>
@@ -14,21 +18,21 @@
     <form action="z01_joinComplete.jsp" method="post">
         <table border>
             <tr>
-                <td class="tableHead"><label for="name">성명:</label></td>
+                <td class="tableHead"><label for="name">성명</label></td>
                 <td><input type="text" id="name" name="name" required></td>
             </tr>
             <tr>
-                <td class="tableHead"><label for="password">비밀번호:</label></td>
+                <td class="tableHead"><label for="password">비밀번호</label></td>
                 <td>
                     <input type="password" id="password" name="password" placeholder="비밀번호입력" required>
                 </td>
             </tr>
             <tr>
-                <td class="tableHead"><label for="birthdate">생년월일:</label></td>
+                <td class="tableHead"><label for="birthdate">생년월일</label></td>
                 <td><input type="date" id="birthdate" name="birthdate" required></td>
             </tr>
             <tr>
-                <td class="tableHead">성별:</td>
+                <td class="tableHead">성별</td>
                 <td>
                     <input type="radio" id="male" name="gender" value="male" required>
                     <label for="male">남성</label>
@@ -37,11 +41,11 @@
                 </td>
             </tr>
             <tr>
-                <td class="tableHead"><label for="phone">휴대폰번호:</label></td>
+                <td class="tableHead"><label for="phone">휴대폰번호</label></td>
                 <td><input type="tel" id="phone" name="phone" required></td>
             </tr>
             <tr>
-                <td class="tableHead">이메일 수신 여부:</td>
+                <td class="tableHead">이메일 수신 여부</td>
                 <td>
                     <input type="radio" id="yes" name="emailReceiv" value="yes" required>
                     <label for="yes">수신함</label>
@@ -50,11 +54,11 @@
                 </td>
             </tr>
             <tr>
-                <td class="tableHead"><label for="email">이메일 주소:</label></td>
+                <td class="tableHead"><label for="email">이메일 주소</label></td>
                 <td><input type="email" id="email" name="email"></td>
             </tr>
             <tr><!--주소 검색-->
-                <td class="tableHead"><label for="address">집주소(도로명):</label></td>
+                <td class="tableHead"><label for="address">집주소(도로명)</label></td>
                 <td>
                     <input type="text" id="postcode" name="postcode" placeholder="우편번호" readonly>
                     <button type="button" onclick="findAddr()" value="우편번호검색">우편번호 검색</button><br>

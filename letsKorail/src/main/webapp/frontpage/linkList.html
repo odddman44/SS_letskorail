@@ -3,24 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #083B82;
+            margin: 0;
+            padding: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-link {
+            display: block;
+            text-decoration: none;
+            color: #083B82;
+            padding: 10px;
+            border: 1px solid #083B82;
+            margin-bottom: 10px;
+            background-color: #083B82;
+        }
+        .nav-link:hover {
+            background: aliceblue;
+            color: #083B82;
+        }
+        h4 {
+            margin: 0;
+            color: white;
+        }
+        h4:hover {
+            font-size: 20px;
+            color : #083B82
+        }
+    </style>
 </head>
-<body class="main">
+<body>
     <ul>
-        <li><a href="Login.html" target="RightWindow"><h4 class="mem">코레일멤버십 로그인</h4></a></li>
-        <li><a href="joinForm.html" target="RightWindow"><h4>회원가입</h4></a></li>
-        <li><a href="myPage.html" target="RightWindow"><h4>마이페이지</h4></a></li>
+        <li><a class="nav-link" href="Login.html" target="RightWindow"><h4>코레일멤버십 로그인</h4></a></li>
+        <li><a class="nav-link" href="joinForm.html" target="RightWindow"><h4>회원가입</h4></a></li>
+        <li><a class="nav-link" href="myPage.html" target="_parent"><h4>마이페이지</h4></a></li>
     </ul>
 </body>
-<style>
-    body.main{
-        background:aliceblue;
-    }
-    li h4 {
-        color : navy;
-    }
-    .mem{
-        font-size:12px;
-    }
-</style>
 </html>

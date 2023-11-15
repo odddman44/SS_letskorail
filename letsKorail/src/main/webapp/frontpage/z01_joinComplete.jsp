@@ -21,7 +21,7 @@
 <body>
     <div>
     <h2>정상적으로 <b>코레일멤버십</b>으로 가입되었습니다.</h2><br>
-    <p class="alertNum">고객님의 멤버십 번호는 <b>${param.membershipNumber}</b>입니다.</p>
+    <p class="alertNum">고객님의 멤버십 번호는 <b><%= request.getParameter("membershipNumber") %></b>입니다.</p>
         <ul>
             <li>코레일멤버십은 별도의 회원카드를 발급받지 않습니다.</li>
             <li><b>코레일 홈페이지에서 승차권 예약서비스를 이용</b>할 수 있습니다.</li>

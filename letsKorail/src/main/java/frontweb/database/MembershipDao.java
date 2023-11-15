@@ -3,6 +3,8 @@ package frontweb.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import frontweb.vo.KoMember;
 
@@ -37,6 +39,17 @@ public class MembershipDao {
 			//연결 해제
 			DB.close(null, pstmt, conn);
 		}
+		
 	}
-
+	
+	public List<KoMember> getMemberSch(KoMember sch){
+		List<KoMember> memList = new ArrayList<KoMember>();
+		String sql="SELECT *\r\n"
+				+ "FROM KOMEMBER\r\n"
+				+ "WHERE name LIKE ?'";
+		return memList;
+	}
+	public static void main(String[] args) {
+		
+	}
 }

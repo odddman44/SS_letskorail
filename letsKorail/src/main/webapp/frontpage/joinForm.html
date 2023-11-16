@@ -75,7 +75,9 @@
             </tr>
         </table>
         
-        <input type="hidden" id="membershipNumberInput" name="membershipNumber" value="">
+        <!-- 프론트에서 생성하는 멤버십 번호 제거 
+			<input type="hidden" id="membershipNumberInput" name="membershipNumber" value="">
+		-->
         <input type="hidden" id="fullAddress" name="fullAddress">
     </form>
 </body>
@@ -102,12 +104,14 @@
     } // 주소찾기 함수 끝
 
     function submitForm(){
+		/***** 프론트에서 생성하는 멤버십 번호 일단 제거 *************
         // 멤버십 번호 생성
         var membershipNumber = Math.floor(Math.random()*9999999999);
         
         // hidden input에 멤버십 번호 설정..
         console.log("membership Number:",membershipNumber);
         document.getElementById("membershipNumberInput").value=membershipNumber;
+		*/
 		
 		// 각 입력 필드의 값 가져오기
 		var name = document.getElementById("name").value;

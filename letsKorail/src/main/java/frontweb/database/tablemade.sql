@@ -1,4 +1,4 @@
--- 1. 테이블 생성
+----- 1. 테이블 생성
 CREATE TABLE koMember (
     member_id NUMBER PRIMARY KEY,
     name VARCHAR2(50) NOT NULL,
@@ -11,28 +11,35 @@ CREATE TABLE koMember (
     address VARCHAR2(100),
     membershipNumber NUMBER
 );
--- 2. 데이터 입력
+----- 2. 데이터 입력
 CREATE SEQUENCE member_id_sequence
-START WITH 2
+START WITH 1
 INCREMENT BY 1;
+-- 시퀀스 삭제
+DROP SEQUENCE member_id_sequence;
+
+-- 멤버 추가
 INSERT INTO koMember 
 (member_id, name, password, birthdate, gender, phone, emailReceiv, email, address, membershipNumber)
 VALUES (member_id_sequence.NEXTVAL, '관리자', 'admin', TO_DATE('2023-01-01', 'YYYY-MM-DD'),
-'Male', '010-0000-0000', 'yes', 'admin@korail.com',
+'male', '010-0000-0000', 'yes', 'admin@korail.com',
 '(34618)대전광역시 동구 중앙로 240', 1000000001);
 
-SELECT * FROM komember;
+-- 멤버 조회(MEMBER_ID 순서)
+SELECT * 
+FROM komember
+ORDER BY MEMBER_ID;
 
--- 삭제하기
+-- 멤버 삭제하기
 DELETE
 FROM KOMEMBER
-WHERE MEMBERSHIPNUMBER =7790498871;
+WHERE MEMBERSHIPNUMBER =378571521;
 
--- 3. 조회 sql 작성
+----- 3. 조회 sql 작성
 SELECT *
 FROM KOMEMBER
 WHERE name LIKE '%관리자%';
--- 4. VO 객체 작성
+----- 4. VO 객체 작성
 /*
 class KomemberTest{
     private String name;
@@ -46,4 +53,12 @@ class KomemberTest{
     private long membershipNumber;
 }
  */
--- 5. 기능메서드 선언
+----- 5. 기능메서드 선언
+-- 멤버십 중복여부 확인
+SELECT count(*)
+FROM KOMEMBER 
+WHERE MEMBERSHIPNUMBER =1000000001;
+-- 로그인 메서드
+SELECT *
+FROM KoMember
+WHERE MEMBERSHIPNUMBER = 1000000001 AND PASSWORD = 'admin';

@@ -3,7 +3,8 @@ package frontweb.vo;
 import java.util.Date;
 
 public class KoMember {
-    private String name;
+	private int member_id;
+	private String name;
     private String password;
     private Date birthdate;
     private String gender;
@@ -84,6 +85,11 @@ public class KoMember {
 	public void setMembershipNumber(long membershipNumber) {
 		this.membershipNumber = membershipNumber;
 	}
-    
+    public int getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
+	}
 	
 }

@@ -62,8 +62,8 @@
                 <td>
                     <input type="text" id="postcode" name="postcode" placeholder="우편번호" readonly>
                     <button type="button" onclick="findAddr()" value="우편번호검색">우편번호 검색</button><br>
-                    <input type="text" id="address" placeholder="주소지" readonly><br>
-                    <input type="text" placeholder="상세주소 입력..">
+                    <input type="text" id="address" name="mainAddress" placeholder="주소지" readonly><br>
+                    <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소 입력..">
                 </td>
             </tr>
             <tr>
@@ -74,7 +74,9 @@
                 </td>
             </tr>
         </table>
+        
         <input type="hidden" id="membershipNumberInput" name="membershipNumber" value="">
+        <input type="hidden" id="fullAddress" name="fullAddress">
     </form>
 </body>
 <script>
@@ -88,7 +90,7 @@
                 var roadAddr = data.roadAddress; // 도로명 주소 변수
                 var jibunAddr = data.jibunAddress; // 지번 주소 변수
                 // 우편 번호와 주소 정보를 해당 필드에 넣기
-                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById('postcode').value =data.zonecode;
                 if(roadAddr !== ''){
                     document.getElementById("address").value = roadAddr;
                 }
@@ -106,27 +108,31 @@
         // hidden input에 멤버십 번호 설정..
         console.log("membership Number:",membershipNumber);
         document.getElementById("membershipNumberInput").value=membershipNumber;
-        // 필수 체크박스 선택자
+		
+		// 각 입력 필드의 값 가져오기
+		var name = document.getElementById("name").value;
+        var password = document.getElementById("password").value;
+        var birthdate = document.getElementById("birthdate").value;
         var gender = document.querySelector('input[name="gender"]:checked');
+        var phone = document.getElementById("phone").value;
         var emailReceiv = document.querySelector('input[name="emailReceiv"]:checked');
-        // 데이터 객체  생성
-        var data = {
-            // getElementById("id값")이 가리키는 객체의 value값을 저장.
-            name: document.getElementById("name").value, 
-            password: document.getElementById("password").value,
-            birthdate: document.getElementById("birthdate").value,
-            gender: gender ? gender.value : "",
-            phone: document.getElementById("phone").value,
-            emailReceiv: emailReceiv ? emailReceiv.value : "",
-            email: document.getElementById("email").value,
-            address: document.getElementById("address").value,
-            membershipNumber: membershipNumber
-        };
-
-	    if (data.name === "" || data.password === "" || data.birthdate === "" || data.gender === "" || data.phone === "" || data.emailReceiv === "") {
-	        alert("필수 입력 항목을 모두 작성해주세요.");
-	        return false; // 제출을 막음
-	    } 
+        var email = document.getElementById("email").value;
+	  	// 주소 결합
+	  	var postcode = document.getElementById("postcode").value;
+	    var mainAddress = document.getElementById("address").value;
+	    var detailAddress = document.getElementById("detailAddress").value;
+	    var fullAddress = "(" + postcode + ") " + mainAddress + " " + detailAddress;
+	
+	    // 결합된 주소를 hidden 필드에 설정
+	    document.getElementById("fullAddress").value = fullAddress;
+        
+	  	// 유효성 검사
+	  	if (!name || !password || !birthdate || !gender || !phone || !emailReceiv) {
+            alert("필수 입력 항목을 모두 작성해주세요.");
+            return false; // 제출을 막음
+        }
+        
+        return true;
 
     }// submitForm() 함수의 끝
 

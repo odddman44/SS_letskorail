@@ -12,7 +12,9 @@ CREATE TABLE koMember (
     membershipNumber NUMBER
 );
 -- 2. 데이터 입력
-CREATE SEQUENCE member_id_seq;
+CREATE SEQUENCE member_id_sequence
+START WITH 2
+INCREMENT BY 1;
 INSERT INTO koMember 
 (member_id, name, password, birthdate, gender, phone, emailReceiv, email, address, membershipNumber)
 VALUES (member_id_sequence.NEXTVAL, '관리자', 'admin', TO_DATE('2023-01-01', 'YYYY-MM-DD'),
@@ -20,6 +22,12 @@ VALUES (member_id_sequence.NEXTVAL, '관리자', 'admin', TO_DATE('2023-01-01', 
 '(34618)대전광역시 동구 중앙로 240', 1000000001);
 
 SELECT * FROM komember;
+
+-- 삭제하기
+DELETE
+FROM KOMEMBER
+WHERE MEMBERSHIPNUMBER =7790498871;
+
 -- 3. 조회 sql 작성
 SELECT *
 FROM KOMEMBER

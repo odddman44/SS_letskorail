@@ -2,7 +2,9 @@ package frontweb.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,35 +13,39 @@ import frontweb.vo.KoMember;
 public class MembershipDao {
 	
 	public void addMember(KoMember member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = DB.con(); // DB연결.
-			if(conn != null) {
-				String sql = "INSERT INTO koMember \r\n"
-						+ "(member_id, name, password, birthdate, gender, phone, emailReceiv, email, address, membershipNumber)\r\n"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, member.getName());
-				pstmt.setString(2, member.getPassword());
-				pstmt.setDate(3, new java.sql.Date(member.getBirthdate().getTime()));
-				pstmt.setString(4, member.getGender());
-				pstmt.setString(5, member.getPhone());
-				pstmt.setString(6, member.getEmailReceiv());
-				pstmt.setString(7, member.getEmail());
-				pstmt.setString(8, member.getAddress());
-				pstmt.setLong(9, member.getMembershipNumber());
-				
-				pstmt.executeUpdate(); // 데이터베이스에 데이터 삽입
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			//연결 해제
-			DB.close(null, pstmt, conn);
-		}
-		
+		int insCnt = 0;
+		String sql = "INSERT INTO koMember \r\n"
+				+ "(member_id, name, password, birthdate, gender, phone, emailReceiv, email, address, membershipNumber)\r\n"
+				+ "VALUES (member_id_sequence.NEXTVAL, ?, ?, TO_DATE(?, 'YYYY-MM-DD'),\r\n"
+				+ "?, ?, ?, ?,\r\n"
+				+ "?, ?)";
+	    try (Connection con = DBCon.con(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+	        con.setAutoCommit(false);
+	        // 처리코드1
+	        pstmt.setString(1, member.getName());
+	        pstmt.setString(2, member.getPassword());
+	        pstmt.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(member.getBirthdate())); // 날짜 형식 변환
+	        pstmt.setString(4, member.getGender());
+	        pstmt.setString(5, member.getPhone());
+	        pstmt.setString(6, member.getEmailReceiv());
+	        pstmt.setString(7, member.getEmail());
+	        pstmt.setString(8, member.getAddress());
+	        pstmt.setLong(9, member.getMembershipNumber());
+
+	        insCnt = pstmt.executeUpdate();
+	        if(insCnt == 0) {
+	        	System.out.println("CUD 실패");
+	        	con.rollback();
+	        }else {
+	        	con.commit(); // Commit the transaction
+	        	System.out.println("CUD 성공");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("DB 에러:" + e.getMessage());
+	    } catch (Exception e) {
+	        System.out.println("일반 에러:" + e.getMessage());
+	    }
+
 	}
 	
 	public List<KoMember> getMemberSch(KoMember sch){
@@ -47,8 +53,23 @@ public class MembershipDao {
 		String sql="SELECT *\r\n"
 				+ "FROM KOMEMBER\r\n"
 				+ "WHERE name LIKE ?'";
+		try( Connection con = DBCon.con(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			// 처리코드1
+			pstmt.setString(1,"%"+sch+"%");
+			try( ResultSet rs = pstmt.executeQuery();){
+				//처리코드2
+				rs.next();
+			}
+		}catch(SQLException e) {
+			System.out.println("DB 에러:"+e.getMessage());
+		}catch(Exception e) {
+			System.out.println("일반 에러:"+e.getMessage());
+		}
 		return memList;
 	}
+	
+	
+	
 	public static void main(String[] args) {
 		
 	}

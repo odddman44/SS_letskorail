@@ -53,13 +53,25 @@ public class MembershipDao {
 		List<KoMember> memList = new ArrayList<KoMember>();
 		String sql="SELECT *\r\n"
 				+ "FROM KOMEMBER\r\n"
-				+ "WHERE name LIKE ?'";
+				+ "WHERE name LIKE ?";
 		try( Connection con = DBCon.con(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			// 처리코드1
-			pstmt.setString(1,"%"+sch+"%");
+			pstmt.setString(1,"%"+sch.getName()+"%");
 			try( ResultSet rs = pstmt.executeQuery();){
 				//처리코드2
-				rs.next();
+				while(rs.next()) {
+					memList.add(new KoMember(
+		                    rs.getString("name"),
+		                    rs.getString("password"),
+		                    rs.getDate("birthdate"),
+		                    rs.getString("gender"),
+		                    rs.getString("phone"),
+		                    rs.getString("emailReceiv"),
+		                    rs.getString("email"),
+		                    rs.getString("address"),
+		                    rs.getLong("membershipNumber")
+							)); 			
+				}
 			}
 		}catch(SQLException e) {
 			System.out.println("DB 에러:"+e.getMessage());

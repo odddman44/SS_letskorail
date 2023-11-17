@@ -19,7 +19,7 @@ MembershipDao dao = new MembershipDao();
 KoMember komem = dao.login(membershipNumber, password);
 
 if(komem != null){
-	//HttpSession session2 = request.getSession();
+	HttpSession session2 = request.getSession();
 	session.setAttribute("loggedInUser", komem);
 	
 	out.println("<script type='text/javascript'>");

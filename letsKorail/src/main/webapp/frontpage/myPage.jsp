@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 import="javax.servlet.http.HttpSession"
-import="frontweb.vo.KoMember"    
+import="frontweb.vo.KoMember"     
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LET'S KORAIL!</title>
+<title>마이페이지</title>
 </head>
 <style>
     #head {
@@ -42,17 +42,18 @@ import="frontweb.vo.KoMember"
 		loggedInUser = (KoMember) session2.getAttribute("loggedInUser");
 	}
 	%>
-	<h2 id="head">
-		<a href = "index.jsp"><img src="image/korailHead.png"></a>
-		<% if(loggedInUser != null) { %>
+    <h2 id="head">
+    <a href = "index.jsp"><img src="image/korailHead.png"></a>
+    		<% if(loggedInUser != null) { %>
 			<span> <%= loggedInUser.getName() %>님이 접속중입니다.</span>
 			<form action="z04_logout.jsp" method="post" style="display:inline;">
 				<input type="submit" value="로그아웃" class="logout-button"/>
 			</form>
 		<% } %>
-	</h2> 
+    </h2>
 	<hr>
-	<iframe src = "linkList.jsp" name="leftMenu" width="20%" height="800"></iframe>
-	<iframe src = "mainPage.html" name="RightWindow" width="75%" height="800"></iframe>
+	<iframe src = "myPageList.html" name="leftMenu" width="20%" height="800"></iframe>
+	<iframe src = "z05_myPageMain.jsp" name="RightWindow" width="75%" height="800"></iframe>
+
 </body>
 </html>

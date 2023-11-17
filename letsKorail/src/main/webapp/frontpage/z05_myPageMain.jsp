@@ -61,7 +61,7 @@ import="frontweb.vo.KoMember"
 </style>
 <body>
     <%
-    //HttpSession session = request.getSession(false);
+    HttpSession session2 = request.getSession(false);
     KoMember loggedInUser = (session != null) ? (KoMember) session.getAttribute("loggedInUser") : null;
     %>
     <h1>마이페이지</h1><br>
